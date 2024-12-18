@@ -37,7 +37,7 @@ export const QrCode = () => {
                 setQrSize(e.target.value)
             }/>
 
-            <button className="generate-button" onClick={generateQR}>Generate QR Code</button>
+            <button className="generate-button" disabled = {loading} onClick={generateQR}>Generate QR Code</button>
             <button className="download-button">DOwnload QR Code</button>
         </div>
         <p className="footer">
