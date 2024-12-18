@@ -20,7 +20,21 @@ export const QrCode = () => {
     }
    }
 
-   function downloadQR() {}
+   function downloadQR() {
+        fetch(img)
+        .then((response) => response.blob())
+        .then((blob) => {
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "qrcode.png";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        })
+        .catch((error) => {
+            console.log("Error downloading QR code, error");
+        });
+   }
   return (
     <div className="app-container">
         <h1>QR CODE GENERATOR</h1>
@@ -38,7 +52,7 @@ export const QrCode = () => {
             }/>
 
             <button className="generate-button" disabled = {loading} onClick={generateQR}>Generate QR Code</button>
-            <button className="download-button">DOwnload QR Code</button>
+            <button className="download-button" onClick={downloadQR}>DOwnload QR Code</button>
         </div>
         <p className="footer">
             Designed by <a href="#">Krishnamoorthy Selvaraj</a>
